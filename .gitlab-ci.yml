@@ -1,0 +1,18 @@
+image gcc:latest
+
+stages:
+  - build
+  - test
+  - example
+
+Build:
+  stage: build
+  script:
+    - make build
+  tags: ["default"]
+
+Test:
+  stage: test
+  script:
+    - make test
+  tags: ["default"]
