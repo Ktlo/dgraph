@@ -16,3 +16,9 @@ Test:
   script:
     - make test
   tags: ["default"]
+
+Example:
+  stage: example
+  script:
+    - make example
+  tags: ["default"]

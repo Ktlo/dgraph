@@ -3,6 +3,5 @@
 *.a
 *.d
 /test/*.test
-# Здесь должно быть имя исполняемого файла для тестовой программы
-/src/cheburashka
-/cheburashka
+/src/dgraph
+/dgraph
