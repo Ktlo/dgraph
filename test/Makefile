@@ -6,10 +6,9 @@ test:=${or ${TESTS},${TESTS},${DEFAULT_TEST}}
 
 test: $(test)
 
-%.test: %.c
-	$(CC) $(CFLAGS) $< -L../src -l$(NAME) -o $@
+%.test: %.c ../src/lib${NAME}.a
+	$(CC) $(CFLAGS) -I../src $< -L../src -l$(NAME) -o $@
 	$(GDB) ./$@
-	$(RM) ./$@
 
 .PHONY: clean
 clean:
