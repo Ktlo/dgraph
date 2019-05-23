@@ -114,7 +114,7 @@ int main(int argc, char *argv[]) {
 	if (cycle != -1) {
 		char *dep_name = *dgraph_retrive_node(graph, cycle, NULL);
 		fprintf(stderr, "ERROR: target '%s' has cycles in dependency tree\n", dep_name);
-		return -1;
+		return 5;
 	}
 	struct easy_list list = { malloc(dgraph_nodes(graph)*sizeof(int)), 0 };
 	struct find_closure closure = { arguments.target, -1 };
@@ -124,7 +124,7 @@ int main(int argc, char *argv[]) {
 		closure.n = 0;
 	if (closure.n == -1) {
 		fprintf(stderr, "ERROR: specified target '%s' do not exists\n", arguments.target);
-		return -1;
+		return 6;
 	}
 	dependency_walker(graph, &list, closure.n);
 	filter_list(&list);
@@ -204,7 +204,8 @@ void init_args(int argc, char *argv[]) {
 	return;
 fail_no_arg:
 	fprintf(stderr, "ERROR: invalid argument, no value specifiend for %s parameter\n", word);
-	exit(-1);
+	exit(1);
 fail_no_file:
 	fprintf(stderr, "ERROR: invalid argument '%s' for %s parameter: %s", argv[i], argv[i - 1], strerror(errno));
+	exit(2);
 }

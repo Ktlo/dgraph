@@ -108,6 +108,8 @@ fail:
 int dgraph_equals(const dgraph_t first, const dgraph_t second, dgraph_element_equals eq) {
 	if (first == second)
 		return 1;
+	if (first == NULL || second == NULL)
+		return 0;
 	size_t nodes = first->nodes;
 	if (nodes != second->nodes)
 		return 0;
@@ -142,7 +144,7 @@ int dgraph_hash_code(const dgraph_t graph, dgraph_element_hash_code hc) {
 	size_t i;
 	for (i = 0; i < nodes; i++) {
 		const dgraph_node_t node = graph->data[i];
-		if (hc)
+		if (hc && node->content)
 			result ^= dgraph_hcr(hc(node->content), 16);
 		result ^= node->n;
 		size_t size = node->size;
